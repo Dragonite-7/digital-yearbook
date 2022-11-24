@@ -71,7 +71,7 @@ export default class NavBar extends React.PureComponent<NavBarProps> {
           <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
         </DigitalSignInSignUp>
       </NavBarStyle>
-    
+
     )
           
   }
