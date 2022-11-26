@@ -9,6 +9,6 @@ export default class HomePage extends React.PureComponent<NextPage> {
       <div>
         <LandingPage/>
       </div>
-    )
+    );
   }
 }

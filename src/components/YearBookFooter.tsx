@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 
 const YearBookFooter: React.FC = () => {
 
@@ -17,6 +18,11 @@ const YearBookFooter: React.FC = () => {
       >
         Previous
       </Button>
+      <Link href="/">
+        <Button variant="outlined">
+          Home
+        </Button>
+      </Link>
       <Button
         variant="outlined"
         onClick={() => alert('TODO')}

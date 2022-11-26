@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/system';
 import type { NextPage } from 'next';
 import { blue } from '@mui/material/colors';
+import Link from '@mui/material/Link';
 // import LandingPage from '../../components/LandingPage';
 
 const YearBookButton = styled(Paper)(({ color }) => ({
@@ -41,9 +42,11 @@ const YearBookPreview: React.FC<Props> = (props) => {
       {
         props.yearbooks.map((data, i) => (
           <Grid item key={'yb' + i}>
-            <YearBookButton elevation={3} color={data.color}>
-              {data.title}
-            </YearBookButton>
+            <Link href="yearbooks/2"> {/* TODO: Dynamic implementation */}
+              <YearBookButton elevation={3} color={data.color}>
+                {data.title}
+              </YearBookButton>
+            </Link>
           </Grid>
         ))
       }
