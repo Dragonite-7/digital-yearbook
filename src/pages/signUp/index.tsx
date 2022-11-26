@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from '../../components/NavBar';
+import { useRouter } from 'next/router';
 
 function Copyright(props) {
   return (
@@ -28,6 +29,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -35,6 +37,7 @@ export default function Register() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    router.push('/');
   };
 
   return (
