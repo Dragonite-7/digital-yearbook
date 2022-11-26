@@ -39,7 +39,6 @@ const DigitalSignInSignUp = styled('div')({
   justifyContent:'flex-end',
   display:'flex',
   textAlign:'center',
-
 })
 const DigitalSignInUp = styled('div')({
   margin: 0,
@@ -56,7 +55,27 @@ const DigitalSignInUp = styled('div')({
   }
 
 })
+const DigitalCreateJoin = styled('div')({
+  margin: 0,
+  flex:1,
+  display:'flex',
+  textAlign:'center',
+})
+const DigitalLeft = styled('div')({
+  margin: 0,
+  fontFamily: 'sans-serif',
+  fontWeight: 700,
+  lineHeight: 1.6,
+  textTransform: 'uppercase',
+  textDecoration: 'none',
+  fontSize: '16px',
+  marginLeft: '24px',
+  cursor:'pointer',
+  '&:hover':{
+    color: '#ff3366',
+  }
 
+})
 
 export default class NavBar extends React.PureComponent<NavBarProps> {
 
@@ -64,8 +83,12 @@ export default class NavBar extends React.PureComponent<NavBarProps> {
   render() {
     return (
       <NavBarStyle >
-        <div style={{flex: 1}}></div>
-        <DigitalBookTitle><Link href="/">Digital year look</Link></DigitalBookTitle>
+        {/* <div style={{flex: 1}}></div> */}
+        <DigitalCreateJoin>
+          <DigitalLeft ><Link href="/join">join yearbook</Link></DigitalLeft>
+          <DigitalLeft ><Link href="/create">create yearbook</Link></DigitalLeft>
+        </DigitalCreateJoin>
+        <DigitalBookTitle><Link href="/">Digital Year Book</Link></DigitalBookTitle>
         <DigitalSignInSignUp>
           <DigitalSignInUp ><Link href="/signIn">sign in</Link></DigitalSignInUp>
           <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
