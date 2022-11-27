@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {  gql, useMutation } from '@apollo/client';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from '../../components/NavBar';
 import { useRouter } from 'next/router';
+import {RegisterMutation,CREATE_USER_MUTATION} from '../api/query'
 
 function Copyright(props) {
   return (
@@ -30,15 +32,22 @@ const theme = createTheme();
 
 export default function Register() {
   const router = useRouter();
+  // const [, registerUser] = useMutation(RegisterMutation)
+  const [createUser] = useMutation(CREATE_USER_MUTATION);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const variables = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
-    });
-    router.push('/');
+    };
+    console.log('vari', variables)
+    createUser({variables})
+    router.push('/signIn');
   };
+
 
   return (
     <ThemeProvider theme={theme}>
