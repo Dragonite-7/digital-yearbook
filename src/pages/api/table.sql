@@ -1,10 +1,19 @@
-create users (
+create table users (
     user_id serial,
     display_name varchar not null,
     password varchar not null,
     email varchar not null,
     profile_picture varchar 
 )
+create table users (
+    id serial,
+    first_name varchar not null,
+    last_name varchar not null,
+    password varchar not null,
+    email varchar not null,
+    profile_picture varchar 
+)
+
 
 
 create table yearbook (
@@ -21,20 +30,20 @@ create table yearbook_users (
     admin boolean,
 )
 
-create bios (
+create table bios (
     yearbook_id serial not null, // join with  yearbookTable
     user_id serial not null, // join with  userTable
     linkedIn varchar,
     facebook varchar,
     fav_quote varchar
 )
-create superlatives (
+create table superlatives (
     yearbook_id serial,
     display_name varchar,
     superlatives_name varchar
 )
 
-create signatures (
+create table signatures (
     interation_id serial,
     signature varchar,
 )

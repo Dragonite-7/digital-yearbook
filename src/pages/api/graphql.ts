@@ -1,7 +1,7 @@
 import {  gql } from '@apollo/client';
 const { ApolloServer } = require('apollo-server-express');
 const { buildFederatedSchema } = require('@apollo/federation');
-import {db} from '../../server/models/User.model'
+import {db} from '../../server/data/db'
 const jwt = require('jsonwebtoken');
 
 const { accounts } = require('../data');

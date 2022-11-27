@@ -2,7 +2,20 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import YearBookPage from '../../components/YearBookPage';
 import YearBookFooter from '../../components/YearBookFooter';
+import { styled } from '@mui/system';
 
+const YearBookPageTop = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-around',
+  padding: 0,
+  margin: 0,
+  listStyle: 'none',
+  width: '100%',
+  height:'85vh'
+});
+const YearBookFooterContent = styled('div')({
+  padding: '1.5rem 0'
+});
 const Post = () => {
   const router = useRouter()
   const { pid } = router.query
@@ -22,22 +35,14 @@ const Post = () => {
   // TODO: Query the backend to get the correct yearbook data to replace this
   // mock data leveraging the pid.
   return (
-    <div style={{
-      width: '100vw',
-    }}>
-      <div style={{
-        width: '100vw',
-        height: 'calc(100vh - 40px)',
-        display: 'flex',
-      }}>
-        <YearBookPage users={leftPageUsers} left={true}/>
+    <div style={{ width: '100%', padding:'3rem'}}>
+      <YearBookPageTop>
+        <YearBookPage users={leftPageUsers} left={true} />
         <YearBookPage users={rightPageUsers} right={true}/>
-      </div>
-      <div style={{
-        height: 40
-      }}>
+      </YearBookPageTop>
+      <YearBookFooterContent>
         <YearBookFooter />
-      </div>
+      </YearBookFooterContent>
     </div>
   )
 }
