@@ -4,8 +4,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 export default function App({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: 'http://localhost:4000/graphql',
-    // uri:'https://api.spacex.land/graphql/'
+    // uri: 'http://localhost:4000/graphql',
+    uri:'https://api.spacex.land/graphql/'
     
   });
   return (
