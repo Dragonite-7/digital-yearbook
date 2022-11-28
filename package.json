@@ -5,9 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start 4000"
+    "start": "next start"
   },
-  "type": "module",
   "dependencies": {
     "@apollo/client": "^3.7.1",
     "@apollo/federation": "^0.38.1",
