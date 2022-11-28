@@ -1,8 +1,21 @@
 import React from 'react';
-import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/system';
+
+const YearBookPageContent = styled('div')({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent:'center',
+  borderBottom: '1px solid black',
+  padding: 20,
+});
+const GridItem = styled('div')({
+  padding: '15px',
+  display: 'inline',
+  textAlign: 'center',
+  lineHeight: '150px',
+});
 
 interface Props {
   // users might need to be updated...
@@ -13,37 +26,23 @@ interface Props {
 
 const YearBookPage: React.FC<Props> = (props) => {
   return (
-    <div style={{
-      width: '50%',
-      border: '1px solid black',
-      backgroundColor: props.left? '#f1f1f1' : '#fcfcfc',
-      padding: 20,
-    }}>
-      {/* <Grid container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-      > */}
-        <div style={{display: 'flex'}}>
-        {
-          props.users.map((data, i) => {
-            return (
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                key={'u' + i}
-              >
-                <Avatar alt="Student yearbook picture" src={data.url} />
-                <Typography>{data.name}</Typography>
-              </Grid>
-            )
-          })
-        }
-      </div>
-    </div>
-  )
+    <YearBookPageContent
+      style={{ backgroundColor: props.left ? '#f1f1f1' : '#fcfcfc' }}
+    >
+      {props.users.map((data, i) => {
+        return (
+          <GridItem key={'u' + i}>
+            <div>
+              <Avatar alt="Student yearbook picture" src={data.url} style={{height:100, width: 100}}/>
+            </div>
+            <div>
+              <Typography>{data.name}</Typography>
+            </div>
+          </GridItem>
+        );
+      })}
+    </YearBookPageContent>
+  );
 };
 
 export default YearBookPage;
