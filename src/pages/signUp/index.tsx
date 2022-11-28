@@ -13,7 +13,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from '../../components/NavBar';
 import { useRouter } from 'next/router';
-import {RegisterMutation,CREATE_USER_MUTATION} from '../api/query'
 
 function Copyright(props) {
   return (
@@ -30,21 +29,35 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+const CREATE_USER_MUTATION = gql`
+  mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      username
+      password
+      display_name
+      picture_url
+    }
+  }
+`;
+
+
 export default function Register() {
   const router = useRouter();
-  // const [, registerUser] = useMutation(RegisterMutation)
   const [createUser] = useMutation(CREATE_USER_MUTATION);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const variables = {
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
+      input:{
+        username: data.get('email'),
+        password: data.get('password'),
+        display_name: `${data.get('firstName')} ${data.get('lastName')}`,
+        picture_url: 'picture_url',
+      }
     };
-    console.log('vari', variables)
+    console.log('variable-->', variables)
     createUser({variables})
+    
     router.push('/signIn');
   };
 

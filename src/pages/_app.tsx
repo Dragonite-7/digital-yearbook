@@ -5,13 +5,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     uri: 'http://localhost:4000/graphql',
+    // uri:'https://api.spacex.land/graphql/'
+    
   });
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />
     </ApolloProvider>
   )
-  
 }
-
-

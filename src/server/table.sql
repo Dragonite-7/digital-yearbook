@@ -1,18 +1,18 @@
 create table users (
     user_id serial,
+    username varchar not null,
+    password varchar not null,
     display_name varchar not null,
-    password varchar not null,
-    email varchar not null,
     profile_picture varchar 
 )
-create table users (
-    id serial,
-    first_name varchar not null,
-    last_name varchar not null,
-    password varchar not null,
-    email varchar not null,
-    profile_picture varchar 
-)
+-- create table users (
+--     id serial,
+--     first_name varchar not null,
+--     last_name varchar not null,
+--     password varchar not null,
+--     email varchar not null,
+--     profile_picture varchar 
+-- )
 
 
 
