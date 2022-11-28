@@ -3,7 +3,7 @@ create table users (
     username varchar not null,
     password varchar not null,
     display_name varchar not null,
-    profile_picture varchar 
+    picture_url varchar 
 )
 -- create table users (
 --     id serial,

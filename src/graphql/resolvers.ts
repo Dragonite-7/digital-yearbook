@@ -1,7 +1,7 @@
 
 
-import {getUsers} from '../server/controllers/user.controllers';
-import { pool } from '../server/data/db';
+const getUsers =  require('../server/controllers/user.controllers');
+const pool = require('../server/data/db');
 import { v4 as uuidv4 } from 'uuid';
 
 

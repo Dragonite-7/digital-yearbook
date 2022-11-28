@@ -2,8 +2,17 @@
 // import typeDefs from './graphql/type-defs'
 // import  resolvers  from './graphql/resolvers';
 // import {getUsers} from './server/controllers/user.controllers';
-import { pool } from './server/data/db';
-import { v4 as uuidv4 } from 'uuid';
+const { Pool } = require('pg');
+require('dotenv').config();
+
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host:'localhost', 
+  database: 'digitalYearBook',
+  password : process.env.DB_PASSWORD,
+  port: 5432
+})
+
 const { ApolloServer,gql  } = require('apollo-server');
 
 const typeDefs = gql`
@@ -42,12 +51,13 @@ const resolvers = {
         text: 'INSERT INTO users(username,password, display_name,  picture_url) VALUES($1, $2, $3, $4)',
         values: [username,password, display_name, picture_url],
       };
-      const response = await pool.query(query,[uuidv4(),username,password, display_name, picture_url]);
+      const response = await pool.query(query,[username,password, display_name, picture_url]);
       console.log('response-->', response)
       return response // 'Successfully created!';
     }
   }
 };
+console.log('resolvers-->', resolvers.Mutation)
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
