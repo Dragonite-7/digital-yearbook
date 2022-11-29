@@ -1,10 +1,8 @@
 import React from 'react'
 import { styled } from '@mui/system';
 import Link from 'next/link';
-import {useSession, getProviders, signIn,signOut } from "next-auth/react"
-interface NavBarProps {
+import {useSession, getProviders, signIn,signOut } from 'next-auth/react'
 
-}
 
 const NavBarStyle = styled('div')({
   boxShadow: 'none',
@@ -79,27 +77,27 @@ const DigitalLeft = styled('div')({
 })
 
 export default function NavBar() {
+  const { data: session } = useSession()
 
+  return (
+    <NavBarStyle >
+      {/* <div style={{flex: 1}}></div> */}
+      <DigitalCreateJoin>
+        <DigitalLeft ><Link href="/join">join yearbook</Link></DigitalLeft>
+        <DigitalLeft ><Link href="/create">create yearbook</Link></DigitalLeft>
+      </DigitalCreateJoin>
+      <DigitalBookTitle><Link href="/">Digital Year Book</Link></DigitalBookTitle>
 
-    return (
-      <NavBarStyle >
-        {/* <div style={{flex: 1}}></div> */}
-        <DigitalCreateJoin>
-          <DigitalLeft ><Link href="/join">join yearbook</Link></DigitalLeft>
-          <DigitalLeft ><Link href="/create">create yearbook</Link></DigitalLeft>
-        </DigitalCreateJoin>
-        <DigitalBookTitle><Link href="/">Digital Year Book</Link></DigitalBookTitle>
-
-        <DigitalSignInSignUp>
+      <DigitalSignInSignUp>
          
-          {/* */}
-          <DigitalSignInUp > <Link href="/signIn">sign in</Link></DigitalSignInUp>
-          <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
-          <DigitalSignInUp onClick={() => signIn()}>sign in</DigitalSignInUp>
-        </DigitalSignInSignUp>
-      </NavBarStyle>
+        {session ?  <DigitalSignInUp onClick={() => signOut()}>sign in</DigitalSignInUp> : 
+          <DigitalSignInUp > <Link href="/signIn">sign in</Link></DigitalSignInUp> }
+        <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
+        <DigitalSignInUp onClick={() => signIn()}><Link href="/api/auth/signin">sign in</Link></DigitalSignInUp>
+      </DigitalSignInSignUp>
+    </NavBarStyle>
 
-    )
+  )
           
   
 }
