@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/Home.module.css';
 import HomePage from './lading-page';
 import {client} from '../server/apollo-client'
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export default function Home({countries}) {
   console.log('countries-->', countries)

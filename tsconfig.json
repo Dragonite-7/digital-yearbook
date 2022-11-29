@@ -24,10 +24,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.js", "src/pages/signIn/signin.js", "src/pages/signIn/signin.js"],
+  "exclude": ["node_modules"]
 }

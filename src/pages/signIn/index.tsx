@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,10 +14,18 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from '../../components/NavBar';
 import { useRouter } from 'next/router';
+import SignInAuth from './signin';
+import { getCsrfToken } from 'next-auth/react';
+import { getProviders } from 'next-auth/react';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
@@ -29,8 +37,11 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
+interface SignInProps {
+  csrfToken: any;
+}
 
-export default function SignIn() {
+export default function SignIn({ csrfToken }) {
   const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,11 +52,21 @@ export default function SignIn() {
     });
     router.push('/');
   };
+  const providers = [
+    {
+      name: 'google',
+      id: '001',
+    },
+    {
+      name: 'github',
+      id: '002',
+    },
+  ];
 
   return (
     <ThemeProvider theme={theme}>
-      <NavBar/>
-      <Container component="main" maxWidth="xs" style={{marginTop: '12rem'}}>
+      <NavBar />
+      <Container component="main" maxWidth="xs" style={{ marginTop: '12rem' }}>
         <CssBaseline />
         <Box
           sx={{
@@ -61,7 +82,14 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            method="post"
+            noValidate
+            sx={{ mt: 1 }}
+            action="/api/auth/signin/email"
+            onSubmit={handleSubmit}
+          >
             <TextField
               margin="normal"
               required
@@ -86,17 +114,14 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            
-            <Link href="/">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -111,6 +136,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
+        <SignInAuth providers={providers} />
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
