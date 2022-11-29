@@ -1,6 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/system';
 import Link from 'next/link';
+import {useSession, getProviders, signIn,signOut } from "next-auth/react"
 interface NavBarProps {
 
 }
@@ -77,10 +78,9 @@ const DigitalLeft = styled('div')({
 
 })
 
-export default class NavBar extends React.PureComponent<NavBarProps> {
+export default function NavBar() {
 
-    
-  render() {
+
     return (
       <NavBarStyle >
         {/* <div style={{flex: 1}}></div> */}
@@ -89,13 +89,17 @@ export default class NavBar extends React.PureComponent<NavBarProps> {
           <DigitalLeft ><Link href="/create">create yearbook</Link></DigitalLeft>
         </DigitalCreateJoin>
         <DigitalBookTitle><Link href="/">Digital Year Book</Link></DigitalBookTitle>
+
         <DigitalSignInSignUp>
-          <DigitalSignInUp ><Link href="/signIn">sign in</Link></DigitalSignInUp>
+         
+          {/* */}
+          <DigitalSignInUp > <Link href="/signIn">sign in</Link></DigitalSignInUp>
           <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
+          <DigitalSignInUp onClick={() => signIn()}>sign in</DigitalSignInUp>
         </DigitalSignInSignUp>
       </NavBarStyle>
 
     )
           
-  }
+  
 }

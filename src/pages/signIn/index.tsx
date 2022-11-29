@@ -14,6 +14,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NavBar from '../../components/NavBar';
 import { useRouter } from 'next/router';
+import { SessionProvider } from "next-auth/react"
+import SignInAuth from './signin'
+import { getCsrfToken } from "next-auth/react"
+
 
 function Copyright(props) {
   return (
@@ -30,7 +34,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({ csrfToken }) {
   const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -96,6 +100,7 @@ export default function SignIn() {
               >
                 Sign In
               </Button>
+              <SignInAuth/>
             </Link>
             <Grid container>
               <Grid item xs>
@@ -116,3 +121,9 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+// export async function getServerSideProps(context) {
+//   const csrfToken = await getCsrfToken(context)
+//   return {
+//     props: { csrfToken },
+//   }
+// }
