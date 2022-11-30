@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/system';
@@ -17,41 +17,40 @@ const YearBookButton = styled(Paper)(({ color }) => ({
   color: 'white',
   cursor: 'pointer',
   fontSize: 32,
-  textShadow: '1px 1px 0px black'
+  textShadow: '1px 1px 0px black',
 }));
 
 interface Props {
   yearbooks: {
-    title: string;
-    color: string;
+    yearbook_name: string;
+    year: string;
   }[];
 }
 
 const YearBookPreview: React.FC<Props> = (props) => {
-
   return (
     <Grid
       container
-      direction="row"
-      justifyContent="space-around"
-      alignItems="center"
+      direction='row'
+      justifyContent='space-around'
+      alignItems='center'
       style={{
         marginTop: 200,
       }}
     >
-      {
-        props.yearbooks.map((data, i) => (
-          <Grid item key={'yb' + i}>
-            <Link href="yearbooks/2"> {/* TODO: Dynamic implementation */}
-              <YearBookButton elevation={3} color={data.color}>
-                {data.title}
-              </YearBookButton>
-            </Link>
-          </Grid>
-        ))
-      }
+      {props.yearbooks.map((data, i) => (
+        <Grid item key={'yb' + i}>
+          <Link href='yearbooks/2'>
+            {' '}
+            {/* TODO: Dynamic implementation */}
+            <YearBookButton elevation={3} color={'#ff0000'}>
+              {data.yearbook_name}
+            </YearBookButton>
+          </Link>
+        </Grid>
+      ))}
     </Grid>
-  )
-} 
+  );
+};
 
 export default YearBookPreview;
