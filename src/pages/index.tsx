@@ -3,9 +3,26 @@ import styles from '../styles/Home.module.css';
 import HomePage from './lading-page';
 import {client} from '../server/apollo-client'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { useEffect } from 'react'
+import io from 'Socket.IO-client';
+
+let socket;
 
 export default function Home({countries}) {
-  console.log('countries-->', countries)
+  useEffect(() => {
+    socketInitializer()
+  }, []);
+
+  const socketInitializer = async () => {
+    await fetch('/api/socket');
+    socket = io();
+
+    socket.on('connect', () => {
+      console.log('connected');
+    })
+  }
+
+  console.log('countries-->', countries);
   return (
     <div className={styles.container}>
       <HomePage/>
@@ -31,4 +48,3 @@ export async function getStaticProps() {
     }
   }
 }
-
