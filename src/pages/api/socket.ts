@@ -7,7 +7,15 @@ const SocketHandler = (req: any, res: any) => {
     console.log('Socket is initializing');
     const io = new Server(res.socket.server);
     res.socket.server.io = io;
+
+		io.on('connection', socket => {
+      socket.on('joined', userDisplayData => {
+				console.log('New user joined - Backend');
+        socket.broadcast.emit('joined', userDisplayData);
+      });
+    });
   }
+
   res.end();
 }
 
