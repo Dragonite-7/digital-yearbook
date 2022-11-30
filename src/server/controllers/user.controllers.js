@@ -14,33 +14,16 @@ userController.createUser = async (_, args, ...other) => {
   await pool.query(query, params);
 };
 
-const findUserByEmail = async (email) => {
-  const query = {
-    text: 'SELECT * FROM users WHERE email = $1',
-    values: [email],
-  };
+userController.findUserByUsername = async (_, args, ...other) => {
+  console.log(args);
+  console.log(args.username);
+  const params = [args.username];
+  const query = 'SELECT * FROM users WHERE username = $1';
 
   try {
-    const res = await pool.query(query);
-    console.log('res email-->', res);
-    return res.rows;
-  } catch (err) {
-    console.error(err);
-  }
-  return [
-    {
-      id: '0',
-      name: 'J Doe',
-      email: 'jdoe@zcorp.com',
-      password: 'passwordz',
-    },
-  ];
-};
-
-userController.readQuery = async (query) => {
-  try {
-    const res = await pool.query(query);
-    return res.rows;
+    const res = await pool.query(query, params);
+    console.log('res user-->', res.rows);
+    return res.rows[0];
   } catch (err) {
     console.error(err);
   }
@@ -50,13 +33,21 @@ userController.getUsersFromUsersTable = async (req, res, next) => {
   const query = `
     SELECT * FROM users;
     `;
+  await pool.query(query, params);
+};
+// userController.getUsers = async (req, res, next) => {
+//   const usersFromUsersTable = await userController.getUsersFromUsersTable();
+//   res.locals.users = usersFromUsersTable;
+//   return next();
+// };
 
-  return userController.readQuery(query);
-};
-userController.getUsers = async (req, res, next) => {
-  const usersFromUsersTable = await userController.getUsersFromUsersTable();
-  res.locals.users = usersFromUsersTable;
-  return next();
-};
+// userController.readQuery = async (query) => {
+//   try {
+//     const res = await pool.query(query);
+//     return res.rows;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 module.exports = userController;

@@ -9,7 +9,8 @@ const typeDefs = gql`
     picture_url: String!
   }
   type Query {
-    getUsers: [User]!
+    getUsers: [User]
+    getUser(username: String): User
   }
   input NewUserInput {
     username: String!
