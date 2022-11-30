@@ -29,23 +29,10 @@ const CREATE_USER = gql`
   }
 `;
 
-const GET_USERS = gql`
-  query getUsers {
-    getUsers {
-      user_id
-      display_name
-    }
-  }
-`;
-
 export default function Register() {
   const router = useRouter();
   const [error, setError] = React.useState('');
   const [open, setOpen] = React.useState(false);
-
-  // usequery runs as soon as component loads
-  // const { data } = useQuery(GET_USERS);
-  // console.log(data);
 
   const [createUser, newUser]: any = useMutation(CREATE_USER, {
     variables: {
