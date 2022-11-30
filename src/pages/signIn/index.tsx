@@ -54,13 +54,13 @@ export default function SignIn({ csrfToken }) {
   };
   const providers = [
     {
-      name: 'google',
+      name: 'github',
       id: '001',
     },
-    {
-      name: 'github',
-      id: '002',
-    },
+    // {
+    //   name: 'github',
+    //   id: '002',
+    // },
   ];
 
   return (
@@ -136,10 +136,10 @@ export default function SignIn({ csrfToken }) {
             </Grid>
           </Box>
         </Box>
-        <SignInAuth />
+        <SignInAuth
+         />
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 }
-//providers={providers} 

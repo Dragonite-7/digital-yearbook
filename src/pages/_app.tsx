@@ -3,9 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import React from 'react';
 
-export default function App({
-  Component, pageProps: { session, ...pageProps }
-}) {
+export default function App({ Component, pageProps, session }) {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
     // uri: 'http://localhost:4000/graphql',

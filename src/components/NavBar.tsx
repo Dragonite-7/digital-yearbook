@@ -91,9 +91,8 @@ export default function NavBar() {
       <DigitalSignInSignUp>
          
         {session ?  <DigitalSignInUp onClick={() => signOut()}>sign in</DigitalSignInUp> : 
-          <DigitalSignInUp > <Link href="/signIn">sign in</Link></DigitalSignInUp> }
+        <DigitalSignInUp > <Link href="/signIn">sign in</Link></DigitalSignInUp> }
         <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
-        <DigitalSignInUp onClick={() => signIn()}><Link href="/api/auth/signin">sign in</Link></DigitalSignInUp>
       </DigitalSignInSignUp>
     </NavBarStyle>
 
