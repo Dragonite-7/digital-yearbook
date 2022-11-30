@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import Link from 'next/link';
-import {useSession, getProviders, signIn,signOut } from 'next-auth/react'
-
+import { useSession, getProviders, signIn, signOut } from 'next-auth/react';
 
 const NavBarStyle = styled('div')({
   boxShadow: 'none',
-  display:'flex', 
+  display: 'flex',
   height: '70px',
   width: '100%',
   boxSizing: 'border-box',
@@ -28,17 +27,17 @@ const DigitalBookTitle = styled('div')({
   fontWeight: 700,
   fontSize: '24px',
   lineHeight: 1.6,
-  cursor:'pointer',
+  cursor: 'pointer',
   textTransform: 'uppercase',
   textDecoration: 'none',
-})
+});
 const DigitalSignInSignUp = styled('div')({
   margin: 0,
-  flex:1,
-  justifyContent:'flex-end',
-  display:'flex',
-  textAlign:'center',
-})
+  flex: 1,
+  justifyContent: 'flex-end',
+  display: 'flex',
+  textAlign: 'center',
+});
 const DigitalSignInUp = styled('div')({
   margin: 0,
   fontFamily: 'sans-serif',
@@ -48,18 +47,17 @@ const DigitalSignInUp = styled('div')({
   textDecoration: 'none',
   fontSize: '16px',
   marginLeft: '24px',
-  cursor:'pointer',
-  '&:hover':{
+  cursor: 'pointer',
+  '&:hover': {
     color: '#ff3366',
-  }
-
-})
+  },
+});
 const DigitalCreateJoin = styled('div')({
   margin: 0,
-  flex:1,
-  display:'flex',
-  textAlign:'center',
-})
+  flex: 1,
+  display: 'flex',
+  textAlign: 'center',
+});
 const DigitalLeft = styled('div')({
   margin: 0,
   fontFamily: 'sans-serif',
@@ -69,34 +67,66 @@ const DigitalLeft = styled('div')({
   textDecoration: 'none',
   fontSize: '16px',
   marginLeft: '24px',
-  cursor:'pointer',
-  '&:hover':{
+  cursor: 'pointer',
+  '&:hover': {
     color: '#ff3366',
-  }
-
-})
+  },
+});
 
 export default function NavBar() {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
+  const [userIdCookie, setUserIdCookie] = useState<Number>(0);
+
+  useEffect(() => {
+    setUserIdCookie(
+      Number(
+        document.cookie
+          .split('; ')
+          .find((row) => row.startsWith('user_id='))
+          ?.split('=')[1]
+      ) || 0
+    );
+  }, []);
 
   return (
-    <NavBarStyle >
+    <NavBarStyle>
       {/* <div style={{flex: 1}}></div> */}
-      <DigitalCreateJoin>
-        <DigitalLeft ><Link href="/join">join yearbook</Link></DigitalLeft>
-        <DigitalLeft ><Link href="/create">create yearbook</Link></DigitalLeft>
-      </DigitalCreateJoin>
-      <DigitalBookTitle><Link href="/">Digital Year Book</Link></DigitalBookTitle>
+      {userIdCookie ? (
+        <DigitalCreateJoin>
+          <DigitalLeft>
+            <Link href='/join'>join yearbook</Link>
+          </DigitalLeft>
+          <DigitalLeft>
+            <Link href='/create'>create yearbook</Link>
+          </DigitalLeft>
+        </DigitalCreateJoin>
+      ) : (
+        <DigitalCreateJoin></DigitalCreateJoin>
+      )}
+      <DigitalBookTitle>
+        <Link href='/'>Digital Year Book</Link>
+      </DigitalBookTitle>
 
       <DigitalSignInSignUp>
-         
-        {session ?  <DigitalSignInUp onClick={() => signOut()}>sign in</DigitalSignInUp> : 
-        <DigitalSignInUp > <Link href="/signIn">sign in</Link></DigitalSignInUp> }
-        <DigitalSignInUp ><Link href="/signUp">sign up</Link></DigitalSignInUp>
+        {userIdCookie ? (
+          <DigitalSignInUp
+            onClick={() => {
+              document.cookie = 'user_id=0';
+              signOut();
+            }}
+          >
+            sign out
+          </DigitalSignInUp>
+        ) : (
+          <DigitalSignInUp>
+            {' '}
+            <Link href='/signIn'>sign in</Link>
+          </DigitalSignInUp>
+        )}
+        {/* <DigitalSignInUp>
+          <Link href='/signUp'>sign up</Link>
+        </DigitalSignInUp> */}
       </DigitalSignInSignUp>
     </NavBarStyle>
-
-  )
-          
-  
+  );
 }
