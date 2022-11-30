@@ -5,16 +5,6 @@ create table users (
     display_name varchar not null,
     picture_url varchar 
 )
--- create table users (
---     id serial,
---     first_name varchar not null,
---     last_name varchar not null,
---     password varchar not null,
---     email varchar not null,
---     profile_picture varchar 
--- )
-
-
 
 create table yearbook (
     yearbook_id serial,
