@@ -1,4 +1,4 @@
-const userController = require('../server/controllers/user.controllers');
+const userController = require('../controllers/user.controllers');
 
 const resolvers = {
   Query: {

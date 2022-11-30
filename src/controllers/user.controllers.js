@@ -48,11 +48,12 @@ userController.getYearbooksByUser = async (_, args, ...other) => {
   }
 };
 
-userController.getAllUsers = async (req, res, next) => {
+userController.getAllUsers = async (_, args, ...other) => {
   const query = `
     SELECT * FROM users;
     `;
-  await pool.query(query, params);
+  const res = await pool.query(query);
+  return res.rows;
 };
 
 userController.createYearbook = async (_, args, ...other) => {
