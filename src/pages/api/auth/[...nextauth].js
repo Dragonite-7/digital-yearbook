@@ -22,9 +22,9 @@ export const authOptions = ({
     })
   ], 
   database: process.env.DATABASE_URL,
-  pages:{
-    signIn: '/signIn',
-  }
+  // pages:{
+  //   signIn: '/signIn',
+  // }
 })
 
 export default NextAuth(authOptions)

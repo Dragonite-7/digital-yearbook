@@ -136,9 +136,10 @@ export default function SignIn({ csrfToken }) {
             </Grid>
           </Box>
         </Box>
-        <SignInAuth providers={providers} />
+        <SignInAuth />
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 }
+//providers={providers} 
