@@ -1,34 +1,20 @@
-import * as React from 'react';
-import {  gql, useMutation } from '@apollo/client';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import NavBar from '../../components/NavBar';
-import { useRouter } from 'next/router';
-import 'react-toastify/dist/ReactToastify.css';
-import AlertDialogError from '../../components/notification/error';
-
-
-function Copyright(props:any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.google.com">
-        MyDearBook
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import * as React from "react";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import NavBar from "../../components/NavBar";
+import { useRouter } from "next/router";
+import "react-toastify/dist/ReactToastify.css";
+import AlertDialogError from "../../components/notification/error";
 
 const theme = createTheme();
 
@@ -43,90 +29,85 @@ const CREATE_USER_MUTATION = gql`
   }
 `;
 
-
-const baseurl = 'http://localhost:3001/api/' || ''
+const GET_USERS = gql`
+  query getUsers {
+    getUsers {
+      user_id
+      display_name
+    }
+  }
+`;
 
 export default function Register() {
   const router = useRouter();
-  const [error, setError] = React.useState('')
+  const [error, setError] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
-  const [createUser] = useMutation(CREATE_USER_MUTATION);
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   const variables = {
-  //     input:{
-  //       username: data.get('email'),
-  //       password: data.get('password'),
-  //       display_name: `${data.get('firstName')} ${data.get('lastName')}`,
-  //       picture_url: 'picture_url',
-  //     }
-  //   };
-  //   console.log('variable-->', variables)
-  //   createUser({variables})
-  //   console.log('createUser-->', createUser)
-  //   router.push('/signIn');
-  // };
- 
-  const handleSubmit = (event:any) => {
+  // usequery runs as soon as component loads
+  const { data } = useQuery(GET_USERS);
+  console.log(data);
+
+  // const [getUsers, [data, loading, err]]: any = useMutation(GET_USERS, {
+  //   variables: {
+  //     username: "",
+  //     password: "",
+  //     display_name: "",
+  //     picture_url: "",
+  //   },
+  // });
+
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    console.log(data);
+
     const variables = {
-      
-      username: data.get('email'),
-      password: data.get('password'),
-      display_name: `${data.get('firstName')} ${data.get('lastName')}`,
-      picture_url: 'picture_url',
-      
-    };
-    fetch(`${baseurl}createUser`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
+      input: {
+        username: data.get("email"),
+        password: data.get("password"),
+        display_name: `${data.get("firstName")} ${data.get("lastName")}`,
+        picture_url: "picture_url",
       },
-      body: JSON.stringify(variables),
-    }).then((res) => res.json())
-      .then(data=>{
-        console.log('data-->', data)
-        if(data.status === 400){
-          setError(data.error)
-          setOpen(true)
-        }else {
-          router.push('/signIn');
-        }
-      })
-      .catch(error=> console.log('error->', error))
+    };
+    // console.log("variable-->", variables);
+    // createUser({ variables });
+    // console.log("createUser-->", createUser);
+    // router.push("/signIn");
   };
+
   const handleClose = () => {
     setOpen(false);
   };
   const dialog = (
-    <AlertDialogError open={open} handleClose={handleClose} error = {error}/>
-  )
+    <AlertDialogError open={open} handleClose={handleClose} error={error} />
+  );
 
   return (
     <ThemeProvider theme={theme}>
-      {open && dialog }
-      <NavBar/>
-      <Container component="main" maxWidth="xs" style={{marginTop: '12rem'}}>
+      {open && dialog}
+      <NavBar />
+      <Container component="main" maxWidth="xs" style={{ marginTop: "12rem" }}>
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -170,7 +151,6 @@ export default function Register() {
                   autoComplete="new-password"
                 />
               </Grid>
-              
             </Grid>
             <Button
               type="submit"
@@ -189,7 +169,6 @@ export default function Register() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
