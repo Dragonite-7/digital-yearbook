@@ -9,11 +9,7 @@
     "jsx": "preserve",
     "composite": true,
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -24,6 +20,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.js", "src/pages/signIn/signin.js", "src/pages/signIn/signin.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/index.js",
+    "src/pages/signIn/signin.js",
+    "src/pages/signIn/signin.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -6,7 +6,7 @@ import { styled } from '@mui/system';
 const YearBookPageContent = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent:'center',
+  justifyContent: 'center',
   borderBottom: '1px solid black',
   padding: 20,
 });
@@ -33,7 +33,11 @@ const YearBookPage: React.FC<Props> = (props) => {
         return (
           <GridItem key={'u' + i}>
             <div>
-              <Avatar alt="Student yearbook picture" src={data.url} style={{height:100, width: 100}}/>
+              <Avatar
+                alt='Student yearbook picture'
+                src={data.url}
+                style={{ height: 100, width: 100 }}
+              />
             </div>
             <div>
               <Typography>{data.name}</Typography>
