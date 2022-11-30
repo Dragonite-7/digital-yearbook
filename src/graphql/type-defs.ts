@@ -39,7 +39,6 @@ const typeDefs = gql`
     createYearbook(input: NewYearbookInput!): Yearbook
   }
 `;
-export {}; // needed because typescript is dumb
-module.exports = typeDefs;
-// export default typeDefs;
+
+export default typeDefs;
 // updateUsername(input: UpdateUsernameInput!): User

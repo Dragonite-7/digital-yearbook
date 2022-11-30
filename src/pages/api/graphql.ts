@@ -1,7 +1,7 @@
 // https://medium.com/codex/creating-a-graphql-api-with-nextjs-ef51a0f6e6ed
 import { gql, ApolloServer } from 'apollo-server-micro';
-const typeDefs = require('../../graphql/type-defs');
-const resolvers = require('../../graphql/resolvers');
+import typeDefs from '../../graphql/type-defs';
+import resolvers from '../../graphql/resolvers';
 import Cors from 'micro-cors'; // error here just because this doesn't have type file
 const cors = Cors();
 
