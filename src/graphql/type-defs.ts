@@ -12,19 +12,19 @@ const typeDefs = gql`
     getUsers: [User]!
   }
 
-  input CreateUserInput {
+  input NewUserInput {
     username: String!
     password: String!
     display_name: String!
     picture_url: String!
   }
-  
+
   type Mutation {
-    createUser(input: CreateUserInput!): User
+    createUser(input: NewUserInput!): User
     deleteUser(id: ID!): User
   }
 `;
-export {} // needed because typescript is dumb
-module.exports = typeDefs
+export {}; // needed because typescript is dumb
+module.exports = typeDefs;
 // export default typeDefs;
 // updateUsername(input: UpdateUsernameInput!): User
