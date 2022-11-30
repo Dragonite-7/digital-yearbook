@@ -1,14 +1,10 @@
-
-
-const getUsers =  require('../server/controllers/user.controllers');
+const userController = require("../server/controllers/user.controllers");
 const pool = require('../server/data/db');
 import { v4 as uuidv4 } from 'uuid';
 
-
-
 const resolvers = {
   Query: {
-    users: async () => getUsers(),
+    getUsers: async () => await userController.getUsersFromUsersTable(),
   },
   Mutation : {
     createUser: async(req:any) => {
@@ -24,4 +20,5 @@ const resolvers = {
     }
   }
 };
-export default resolvers;
+// export default resolvers;
+module.exports = resolvers

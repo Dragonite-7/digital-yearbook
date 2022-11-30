@@ -9,7 +9,7 @@ const typeDefs = gql`
     picture_url: String!
   }
   type Query {
-    users: [User]!
+    getUsers: [User]!
   }
 
   input CreateUserInput {
@@ -24,5 +24,7 @@ const typeDefs = gql`
     deleteUser(id: ID!): User
   }
 `;
-export default typeDefs;
+export {} // needed because typescript is dumb
+module.exports = typeDefs
+// export default typeDefs;
 // updateUsername(input: UpdateUsernameInput!): User
