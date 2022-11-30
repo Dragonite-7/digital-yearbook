@@ -2,11 +2,13 @@ const userController = require('../server/controllers/user.controllers');
 
 const resolvers = {
   Query: {
-    getUsers: userController.getUsersFromUsersTable,
-    getUser: userController.findUserByUsername,
+    getUsers: userController.getAllUsers,
+    getUser: userController.getUserByUsername,
+    getYearbooks: userController.getYearbooksByUser,
   },
   Mutation: {
     createUser: userController.createUser,
+    createYearbook: userController.createYearbook,
   },
 };
 
