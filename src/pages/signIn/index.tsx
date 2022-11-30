@@ -29,6 +29,7 @@ const GET_USER = gql`
     getUser(username: $username) {
       username
       password
+      user_id
     }
   }
 `;
@@ -49,6 +50,7 @@ export default function SignIn({ csrfToken }) {
       if (data.getUser.password === password) {
         console.log('password match');
         // allow signin
+        document.cookie = `user_id=${data.getUser.user_id}`;
         router.push('/');
       } else {
         alert('Username or password incorrect!');
