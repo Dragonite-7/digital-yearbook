@@ -3,9 +3,14 @@ const yearbookController = require('../controllers/yearbookController');
 
 const resolvers = {
   Query: {
-    getUsers: userController.getAllUsers,
-    getUser: userController.getUserByUsername,
+    getAllUsers: userController.getAllUsers,
+    getUsers: userController.getUsersByYearbook,
     getYearbooks: yearbookController.getYearbooksByUser,
+    getUser: async (...args) => {
+      if (args[1].username)
+        return await userController.getUserByUsername(...args);
+      else return await userController.getUserByUserId(...args);
+    },
   },
   Mutation: {
     createUser: userController.createUser,

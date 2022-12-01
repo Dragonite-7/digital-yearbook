@@ -16,7 +16,6 @@ yearbookController.getYearbooksByUser = async (_, args, ...other) => {
 
   try {
     const res = await pool.query(query, params);
-    console.log('res user-->', res.rows);
     return res.rows;
   } catch (err) {
     console.error(err);
@@ -33,7 +32,6 @@ yearbookController.createYearbook = async (_, args, ...other) => {
   returning *
   `;
   const res = await pool.query(query, params);
-  console.log(res);
   const newYearbookId = res.rows[0].yearbook_id;
   console.log(newYearbookId);
   const params2 = [newYearbookId, user_id];
@@ -54,7 +52,6 @@ yearbookController.joinYearbook = async (_, args, ...other) => {
   `;
   console.log(params);
   const res = await pool.query(query, params);
-  console.log(res);
 
   const params2 = [res.rows[0].yearbook_id, user_id];
   const query2 = `
