@@ -107,8 +107,8 @@ export default function NavBar() {
         <Link href='/'>Digital Year Book</Link>
       </DigitalBookTitle>
 
-      <DigitalSignInSignUp>
-        {userIdCookie ? (
+      {userIdCookie ? (
+        <DigitalSignInSignUp>
           <DigitalSignInUp
             onClick={() => {
               document.cookie = 'user_id=0';
@@ -117,16 +117,18 @@ export default function NavBar() {
           >
             sign out
           </DigitalSignInUp>
-        ) : (
+        </DigitalSignInSignUp>
+      ) : (
+        <DigitalSignInSignUp>
           <DigitalSignInUp>
             {' '}
             <Link href='/signIn'>sign in</Link>
           </DigitalSignInUp>
-        )}
-        {/* <DigitalSignInUp>
-          <Link href='/signUp'>sign up</Link>
-        </DigitalSignInUp> */}
-      </DigitalSignInSignUp>
+          <DigitalSignInUp>
+            <Link href='/signUp'>sign up</Link>
+          </DigitalSignInUp>
+        </DigitalSignInSignUp>
+      )}
     </NavBarStyle>
   );
 }
