@@ -13,6 +13,10 @@ const SocketHandler = (req: any, res: any) => {
         console.log('New user joined - Backend');
         socket.broadcast.emit('joined', userDisplayData);
       });
+      // socket.on('disconnected', (userDisplayData) => {
+      //   console.log('user disconnected - Backend');
+      //   socket.broadcast.emit('disconnected', userDisplayData);
+      // });
     });
   }
 
