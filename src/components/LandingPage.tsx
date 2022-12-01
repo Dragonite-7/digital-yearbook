@@ -2,7 +2,11 @@ import { gql, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import YearBookPreview from './YearBookPreview';
-interface LadingPageProps {}
+import Online from './Online';
+
+interface Props {
+  onlineUsers: any[];
+}
 
 const GET_YEARBOOKS = gql`
   query getYearbooks($user_id: Int!) {
@@ -15,7 +19,7 @@ const GET_YEARBOOKS = gql`
   }
 `;
 
-export default function LandingPage() {
+const Landing: React.FC<Props> = ({ onlineUsers }) => {
   const [userIdCookie, setUserIdCookie] = useState<Number>(0);
 
   useEffect(() => {
@@ -35,6 +39,7 @@ export default function LandingPage() {
 
   return (
     <div>
+      <Online onlineUsers={onlineUsers} />
       <NavBar />
       {data && data.getYearbooks.length ? (
         <YearBookPreview yearbooks={data ? data.getYearbooks : []} />
@@ -43,4 +48,6 @@ export default function LandingPage() {
       )}
     </div>
   );
-}
+};
+
+export default Landing;
