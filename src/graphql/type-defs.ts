@@ -29,6 +29,10 @@ const typeDefs = gql`
     user_id: Int!
     color: String!
   }
+  input JoinYearbookInput {
+    join_code: String!
+    user_id: Int!
+  }
 
   type Query {
     getUsers: [User]
@@ -39,8 +43,8 @@ const typeDefs = gql`
     createUser(input: NewUserInput!): User
     deleteUser(id: ID!): User
     createYearbook(input: NewYearbookInput!): Yearbook
+    joinYearbook(input: JoinYearbookInput!): Yearbook
   }
 `;
 
 export default typeDefs;
-// updateUsername(input: UpdateUsernameInput!): User

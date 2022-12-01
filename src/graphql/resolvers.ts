@@ -1,14 +1,16 @@
-const userController = require('../controllers/user.controllers');
+const userController = require('../controllers/userController');
+const yearbookController = require('../controllers/yearbookController');
 
 const resolvers = {
   Query: {
     getUsers: userController.getAllUsers,
     getUser: userController.getUserByUsername,
-    getYearbooks: userController.getYearbooksByUser,
+    getYearbooks: yearbookController.getYearbooksByUser,
   },
   Mutation: {
     createUser: userController.createUser,
-    createYearbook: userController.createYearbook,
+    createYearbook: yearbookController.createYearbook,
+    joinYearbook: yearbookController.joinYearbook,
   },
 };
 
