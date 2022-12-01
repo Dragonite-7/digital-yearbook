@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "nodemon src/server/server.js"
+    "start": "nodemon src/server/server.js",
+    "test": "start-server-and-test dev 8080 cypress:open",
+    "cypress:open" : "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
@@ -54,6 +56,7 @@
     "react-apollo": "^3.1.5",
     "react-dom": "18.2.0",
     "react-toastify": "^9.1.1",
+    "start-server-and-test": "^1.14.0",
     "styled-components": "^5.3.6",
     "type-graphql": "^1.1.1",
     "typescript": "4.9.3",
@@ -61,6 +64,7 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
+    "cypress": "^11.2.0",
     "nodemon": "^2.0.20"
   }
 }
