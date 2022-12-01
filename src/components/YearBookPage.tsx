@@ -19,7 +19,7 @@ const GridItem = styled('div')({
 
 interface Props {
   // users might need to be updated...
-  users: any; // User data to populate page
+  users: any[]; // User data to populate page
   left?: boolean | void;
   right?: boolean | void;
 }
@@ -35,12 +35,15 @@ const YearBookPage: React.FC<Props> = (props) => {
             <div>
               <Avatar
                 alt='Student yearbook picture'
-                src={data.url}
+                src={
+                  data.url ||
+                  'https://pbs.twimg.com/profile_images/1245784340497301506/blCWz932_400x400.png'
+                }
                 style={{ height: 100, width: 100 }}
               />
             </div>
             <div>
-              <Typography>{data.name}</Typography>
+              <Typography>{data.display_name}</Typography>
             </div>
           </GridItem>
         );

@@ -38,15 +38,11 @@ const Landing: React.FC<Props> = ({ onlineUsers }) => {
     );
   }, []);
 
-  useEffect(() => {
-    console.log('data changed!');
-  }, [data]);
-
   return (
     <div>
       <Online onlineUsers={onlineUsers} />
       <NavBar />
-      {data && data.getYearbooks.length ? (
+      {data && data.getYearbooks && data.getYearbooks.length ? (
         <YearBookPreview yearbooks={data ? data.getYearbooks : []} />
       ) : (
         <h3>No yearbooks yet!</h3>

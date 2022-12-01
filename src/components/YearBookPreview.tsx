@@ -25,6 +25,7 @@ interface Props {
     yearbook_name: string;
     year: string;
     color: string;
+    yearbook_id: number;
   }[];
 }
 
@@ -41,7 +42,7 @@ const YearBookPreview: React.FC<Props> = (props) => {
     >
       {props.yearbooks.map((data, i) => (
         <Grid item key={'yb' + i}>
-          <Link href='yearbooks/2'>
+          <Link href={`yearbooks/${data.yearbook_id}`}>
             {' '}
             {/* TODO: Dynamic implementation */}
             <YearBookButton elevation={3} color={data.color}>
