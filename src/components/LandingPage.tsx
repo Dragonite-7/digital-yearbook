@@ -15,12 +15,17 @@ const GET_YEARBOOKS = gql`
       year
       yearbook_name
       join_code
+      color
     }
   }
 `;
 
 const Landing: React.FC<Props> = ({ onlineUsers }) => {
   const [userIdCookie, setUserIdCookie] = useState<Number>(0);
+
+  const { data, loading, error } = useQuery(GET_YEARBOOKS, {
+    variables: { user_id: userIdCookie },
+  });
 
   useEffect(() => {
     setUserIdCookie(
@@ -33,9 +38,9 @@ const Landing: React.FC<Props> = ({ onlineUsers }) => {
     );
   }, []);
 
-  const { data, loading, error } = useQuery(GET_YEARBOOKS, {
-    variables: { user_id: userIdCookie },
-  });
+  useEffect(() => {
+    console.log('data changed!');
+  }, [data]);
 
   return (
     <div>

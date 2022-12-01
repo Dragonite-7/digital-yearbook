@@ -58,12 +58,12 @@ userController.getAllUsers = async (_, args, ...other) => {
 
 userController.createYearbook = async (_, args, ...other) => {
   console.log(args);
-  const { year, yearbook_name, join_code, user_id } = args.input;
-  const params = [year, yearbook_name, join_code];
+  const { year, yearbook_name, join_code, user_id, color } = args.input;
+  const params = [year, yearbook_name, join_code, color];
   console.log(params);
   const query = `
-  INSERT INTO YEARBOOKS (year, yearbook_name, join_code) VALUES($1, $2, $3)
-  returning yearbook_id
+  INSERT INTO YEARBOOKS (year, yearbook_name, join_code, color) VALUES($1, $2, $3, $4)
+  returning *
   `;
   const res = await pool.query(query, params);
   console.log(res);
@@ -74,8 +74,8 @@ userController.createYearbook = async (_, args, ...other) => {
   INSERT INTO YEARBOOK_USER (yearbook_id, user_id, admin) VALUES ($1, $2, TRUE)
   returning *
   `;
-  const res2 = await pool.query(query2, params2);
-  return res2.rows[0];
+  await pool.query(query2, params2);
+  return res.rows[0];
 };
 
 module.exports = userController;

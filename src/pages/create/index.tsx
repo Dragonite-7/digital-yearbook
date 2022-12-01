@@ -46,12 +46,13 @@ const CreatePage = () => {
     if (!data) return;
     if (!data.createYearbook) alert('Unsuccessful!');
     else {
-      document.cookie = `yearbood_id=${data.createYearbook.yearbook_id}`;
+      document.cookie = `yearbook_id=${data.createYearbook.yearbook_id}`;
+      alert(`Success! Your join code is: ${data.createYearbook.join_code}`);
       router.push('/');
     }
   }, [data]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const yearbookAttributes = {
@@ -59,10 +60,10 @@ const CreatePage = () => {
       year: formData.get('year'),
       join_code: formData.get('code'),
       user_id: userIdCookie,
+      color: formData.get('color'),
     };
-    // setPassword(userInput.password);
+    console.log(yearbookAttributes);
     createYearbook({ variables: { newYearbook: yearbookAttributes } });
-    router.push('/');
   };
 
   return (
@@ -131,6 +132,7 @@ const CreatePage = () => {
               <FormControlLabel
                 control={
                   <input
+                    name='color'
                     type='color'
                     style={{
                       background: 'transparent',

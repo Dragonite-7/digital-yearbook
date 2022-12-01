@@ -13,6 +13,7 @@ const typeDefs = gql`
     year: String!
     yearbook_name: String!
     join_code: String!
+    color: String!
   }
 
   input NewUserInput {
@@ -26,6 +27,7 @@ const typeDefs = gql`
     yearbook_name: String!
     join_code: String!
     user_id: Int!
+    color: String!
   }
 
   type Query {

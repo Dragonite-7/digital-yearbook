@@ -24,6 +24,7 @@ interface Props {
   yearbooks: {
     yearbook_name: string;
     year: string;
+    color: string;
   }[];
 }
 
@@ -43,7 +44,7 @@ const YearBookPreview: React.FC<Props> = (props) => {
           <Link href='yearbooks/2'>
             {' '}
             {/* TODO: Dynamic implementation */}
-            <YearBookButton elevation={3} color={'#ff0000'}>
+            <YearBookButton elevation={3} color={data.color}>
               {data.yearbook_name}
             </YearBookButton>
           </Link>
