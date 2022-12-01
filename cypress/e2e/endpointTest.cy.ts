@@ -8,3 +8,12 @@ context("Homepage" , () => {
       cy.get("h1").contains("show")
   })
 })
+
+context("Create Yearbook", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:8080/create")
+  })
+  it("should have the create yearbook textbox", () => {
+    cy.get('.MuiBox-root css-1efyeb7').should('be.visible')
+  })
+})

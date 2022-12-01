@@ -2,7 +2,7 @@ export default function Test({toppings}){
     return (
         <div>
             <h1>show this list</h1>
-            <ul>{toppings.map((element) => {
+            <ul className = "list">{toppings.map((element) => {
                 return <li key = {element}>{element}</li>
             })}</ul>
         </div>
