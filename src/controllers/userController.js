@@ -53,7 +53,7 @@ userController.getUsersByYearbook = async (_, args, ...other) => {
   const { yearbook_id } = args;
   const params = [yearbook_id];
   const query = `
-  SELECT display_name FROM users
+  SELECT * FROM users
   WHERE user_id in (
     SELECT user_id FROM yearbook_user WHERE yearbook_id = $1
   );

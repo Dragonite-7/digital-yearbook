@@ -4,11 +4,12 @@ import LandingPage from '../../components/LandingPage';
 
 interface Props {
   onlineUsers: any[];
+  thisUser: any;
 }
 
-const Home: NextPage<Props> = ({ onlineUsers }) => (
+const Home: NextPage<Props> = ({ thisUser, onlineUsers }) => (
   <div>
-    <LandingPage onlineUsers={onlineUsers} />
+    <LandingPage thisUser={thisUser} onlineUsers={onlineUsers} />
   </div>
 );
 

@@ -12,6 +12,8 @@ const GET_USER = gql`
     getUser(user_id: $user_id) {
       display_name
       picture_url
+      username
+      user_id
     }
   }
 `;
@@ -83,7 +85,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <HomePage onlineUsers={onlineUsers} />
+      <HomePage thisUser={data && data.getUser} onlineUsers={onlineUsers} />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Online from './Online';
 
 interface Props {
   onlineUsers: any[];
+  thisUser: any;
 }
 
 const GET_YEARBOOKS = gql`
@@ -20,7 +21,7 @@ const GET_YEARBOOKS = gql`
   }
 `;
 
-const Landing: React.FC<Props> = ({ onlineUsers }) => {
+const Landing: React.FC<Props> = ({ thisUser, onlineUsers }) => {
   const [userIdCookie, setUserIdCookie] = useState<Number>(0);
 
   const { data, loading, error } = useQuery(GET_YEARBOOKS, {
@@ -43,7 +44,10 @@ const Landing: React.FC<Props> = ({ onlineUsers }) => {
       <Online onlineUsers={onlineUsers} />
       <NavBar />
       {data && data.getYearbooks && data.getYearbooks.length ? (
-        <YearBookPreview yearbooks={data ? data.getYearbooks : []} />
+        <YearBookPreview
+          thisUser={thisUser}
+          yearbooks={data ? data.getYearbooks : []}
+        />
       ) : (
         <h3>No yearbooks yet!</h3>
       )}

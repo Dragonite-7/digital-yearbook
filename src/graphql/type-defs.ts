@@ -15,6 +15,11 @@ const typeDefs = gql`
     join_code: String!
     color: String!
   }
+  type Signature {
+    signature_id: Int!
+    yearbook_user_id: Int!
+    signature: String!
+  }
 
   input NewUserInput {
     username: String!
@@ -33,18 +38,25 @@ const typeDefs = gql`
     join_code: String!
     user_id: Int!
   }
+  input NewSignature {
+    user_id: Int!
+    yearbook_id: Int!
+    signature: String!
+  }
 
   type Query {
     getAllUsers: [User]
     getUsers(yearbook_id: Int): [User]
     getUser(username: String, user_id: Int): User
     getYearbooks(user_id: Int): [Yearbook]
+    getSignatures(yearbook_id: Int!, user_id: Int!): [Signature]
   }
   type Mutation {
     createUser(input: NewUserInput!): User
     deleteUser(id: ID!): User
     createYearbook(input: NewYearbookInput!): Yearbook
     joinYearbook(input: JoinYearbookInput!): Yearbook
+    createSignature(input: NewSignature!): Signature
   }
 `;
 

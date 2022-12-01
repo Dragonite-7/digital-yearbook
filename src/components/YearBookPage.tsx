@@ -2,6 +2,8 @@ import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
+import Link from 'next/link';
+import Router from 'next/router';
 
 const YearBookPageContent = styled('div')({
   display: 'flex',
@@ -22,6 +24,8 @@ interface Props {
   users: any[]; // User data to populate page
   left?: boolean | void;
   right?: boolean | void;
+  thisUser: any;
+  curYearbook: number;
 }
 
 const YearBookPage: React.FC<Props> = (props) => {
@@ -30,9 +34,23 @@ const YearBookPage: React.FC<Props> = (props) => {
       style={{ backgroundColor: props.left ? '#f1f1f1' : '#fcfcfc' }}
     >
       {props.users.map((data, i) => {
+        console.log('===', data);
         return (
           <GridItem key={'u' + i}>
-            <div>
+            <span
+              onClick={() => {
+                Router.push(
+                  {
+                    pathname: `${props.curYearbook}/${data.user_id}`,
+                    query: {
+                      thisUser: JSON.stringify(props.thisUser),
+                      curYearbook: props.curYearbook,
+                    },
+                  },
+                  `${props.curYearbook}/${data.user_id}`
+                );
+              }}
+            >
               <Avatar
                 alt='Student yearbook picture'
                 src={
@@ -41,10 +59,10 @@ const YearBookPage: React.FC<Props> = (props) => {
                 }
                 style={{ height: 100, width: 100 }}
               />
-            </div>
-            <div>
-              <Typography>{data.display_name}</Typography>
-            </div>
+              <div>
+                <Typography>{data.display_name}</Typography>
+              </div>
+            </span>
           </GridItem>
         );
       })}

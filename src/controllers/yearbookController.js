@@ -63,4 +63,40 @@ yearbookController.joinYearbook = async (_, args, ...other) => {
   return res.rows[0];
 };
 
+yearbookController.getSignatures = async (_, args, ...other) => {
+  console.log(args);
+  const { user_id, yearbook_id } = args;
+  const params = [user_id, yearbook_id];
+  const query = `
+  SELECT * FROM signatures
+  WHERE yearbook_user_id in (
+    SELECT yearbook_user_id FROM yearbook_user
+    WHERE user_id = $1
+    AND yearbook_id = $2
+  );
+  `;
+
+  const res = await pool.query(query, params);
+  return res.rows;
+};
+
+yearbookController.createSignature = async (_, args, ...other) => {
+  console.log(args.input);
+  const { user_id, yearbook_id, signature } = args.input;
+  const params = [user_id, yearbook_id, signature];
+  console.log(params);
+  const query = `
+  INSERT INTO signatures (yearbook_user_id, signature)
+  SELECT yearbook_user_id, $3
+  FROM yearbook_user
+  WHERE user_id = $1
+  AND yearbook_id = $2
+  RETURNING *
+  `;
+
+  const res = await pool.query(query, params);
+  console.log(res.rows[0]);
+  return res.rows[0];
+};
+
 module.exports = yearbookController;

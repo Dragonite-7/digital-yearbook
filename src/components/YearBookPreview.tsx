@@ -4,8 +4,10 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/system';
 import type { NextPage } from 'next';
 import { blue } from '@mui/material/colors';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
+import Link from 'next/link';
 // import LandingPage from '../../components/LandingPage';
+import Router from 'next/router';
 
 const YearBookButton = styled(Paper)(({ color }) => ({
   display: 'flex',
@@ -27,6 +29,7 @@ interface Props {
     color: string;
     yearbook_id: number;
   }[];
+  thisUser: any;
 }
 
 const YearBookPreview: React.FC<Props> = (props) => {
@@ -42,13 +45,25 @@ const YearBookPreview: React.FC<Props> = (props) => {
     >
       {props.yearbooks.map((data, i) => (
         <Grid item key={'yb' + i}>
-          <Link href={`yearbooks/${data.yearbook_id}`}>
+          <span
+            onClick={() => {
+              Router.push(
+                {
+                  pathname: `yearbooks/${data.yearbook_id}`,
+                  query: {
+                    thisUser: JSON.stringify(props.thisUser),
+                  },
+                },
+                `yearbooks/${data.yearbook_id}`
+              );
+            }}
+          >
             {' '}
             {/* TODO: Dynamic implementation */}
             <YearBookButton elevation={3} color={data.color}>
               {data.yearbook_name}
             </YearBookButton>
-          </Link>
+          </span>
         </Grid>
       ))}
     </Grid>
