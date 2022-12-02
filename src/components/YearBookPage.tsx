@@ -6,7 +6,7 @@ import { styled } from '@mui/system';
 const YearBookPageContent = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent:'center',
+  justifyContent: 'center',
   borderBottom: '1px solid black',
   padding: 20,
 });
@@ -19,7 +19,7 @@ const GridItem = styled('div')({
 
 interface Props {
   // users might need to be updated...
-  users: any; // User data to populate page
+  users: any[]; // User data to populate page
   left?: boolean | void;
   right?: boolean | void;
 }
@@ -33,10 +33,17 @@ const YearBookPage: React.FC<Props> = (props) => {
         return (
           <GridItem key={'u' + i}>
             <div>
-              <Avatar alt="Student yearbook picture" src={data.url} style={{height:100, width: 100}}/>
+              <Avatar
+                alt='Student yearbook picture'
+                src={
+                  data.url ||
+                  'https://pbs.twimg.com/profile_images/1245784340497301506/blCWz932_400x400.png'
+                }
+                style={{ height: 100, width: 100 }}
+              />
             </div>
             <div>
-              <Typography>{data.name}</Typography>
+              <Typography>{data.display_name}</Typography>
             </div>
           </GridItem>
         );
